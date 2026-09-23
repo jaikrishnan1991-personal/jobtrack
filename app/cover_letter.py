@@ -102,10 +102,12 @@ def render_tex(job: dict, t: dict) -> str:
     contact = [uni(b["location"]), uni(b["phone"]),
                r"\href{mailto:%s}{%s}" % (b["email"], b["email"]),
                r"\href{https://%s}{%s}" % (b["linkedin"], b["linkedin"])]
-    for key in ("github", "website"):
-        if b.get(key):
-            contact.append(r"\href{https://%s}{%s}" % (b[key], b[key]))
+    if b.get("website"):
+        contact.append(r"\href{https://%s}{%s}" % (b["website"], b["website"]))
     out.append(r"{\small " + r" \textperiodcentered{} ".join(contact) + r"}\\[1pt]")
+    # GitHub on its own line - see resume.py for why it is not on the contact line
+    if b.get("github"):
+        out.append(r"{\small\color{muted} \href{https://%s}{%s}}" % (b["github"], b["github"]))
     out.append(r"{\color{accent}\rule{\linewidth}{0.6pt}}")
     out.append("")
     out.append(date.today().strftime("%d %B %Y"))

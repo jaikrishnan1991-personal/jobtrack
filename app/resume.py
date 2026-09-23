@@ -217,17 +217,20 @@ def render_tex(job: dict, t: dict) -> str:
     contact = [uni(b["location"]), uni(b["phone"]),
                r"\href{mailto:%s}{%s}" % (b["email"], b["email"]),
                r"\href{https://%s}{%s}" % (b["linkedin"], b["linkedin"])]
-    # optional, so a master.json without it still renders
-    for key in ("github", "website"):
-        if b.get(key):
-            contact.append(r"\href{https://%s}{%s}" % (b[key], b[key]))
+    if b.get("website"):
+        contact.append(r"\href{https://%s}{%s}" % (b["website"], b["website"]))
     out.append(r"{\small " + r" \textperiodcentered{} ".join(contact) + r"}\\[1pt]")
+    # GitHub goes on the second line rather than the contact line: both URLs on one line
+    # overflows and breaks mid-username, and truncating the URL costs an ATS parser the link.
     avail = b.get("availability") or ""
     city = relocation_city(job)
     if city:
         avail += (" \u00b7 " if avail else "") + f"Open to relocating to {city}"
-    if avail:
-        out.append(r"{\small\color{muted} %s}" % esc(avail))
+    second = [esc(avail)] if avail else []
+    if b.get("github"):
+        second.append(r"\href{https://%s}{%s}" % (b["github"], b["github"]))
+    if second:
+        out.append(r"{\small\color{muted} %s}" % r" \textperiodcentered{} ".join(second))
     out.append("")
     out.append(r"\section*{Summary}")
     out.append(uni(t["summary"]))
