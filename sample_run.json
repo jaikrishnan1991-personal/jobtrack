@@ -1,0 +1,306 @@
+{
+  "_note": "Illustrative shape only — these are NOT real postings. Use it to smoke-test the import, then delete the rows.",
+  "run": {
+    "run_date": "2026-09-20",
+    "agent": "sample",
+    "sources_checked": [
+      "company careers pages",
+      "Wellfound",
+      "Instahyre",
+      "GulfTalent"
+    ],
+    "sources_empty": [
+      "MyCareersFuture"
+    ],
+    "scanned": 6,
+    "passed_filter": 6,
+    "notes": "Smoke-test payload."
+  },
+  "postings": [
+    {
+      "company": "Example Robotics Pvt Ltd",
+      "role_title": "Head of Product",
+      "archetype": "A",
+      "archetype_match": "direct",
+      "domains": [
+        "hardware",
+        "robotics",
+        "iot"
+      ],
+      "location": "Hyderabad, India",
+      "work_mode": "Hybrid",
+      "date_posted": "2026-09-16",
+      "date_confidence": "Verified",
+      "experience_asked": "10-15 years",
+      "exp_min": 10,
+      "exp_max": 15,
+      "comp_raw": "INR 55-70 LPA",
+      "comp_currency": "INR",
+      "comp_min": 5500000,
+      "comp_max": 7000000,
+      "comp_confidence": "Stated",
+      "company_stage": "series_b",
+      "unmet_mandatories": [],
+      "missing_keywords": [
+        "ROS2",
+        "fleet management",
+        "teleoperation"
+      ],
+      "apply_url": "https://example.com/careers/head-of-product",
+      "source": "Company careers page",
+      "why_this_score": "No blocking gap; ROS2 exposure is the only soft miss.",
+      "description": "Own the product roadmap for an autonomous mobile robot line."
+    },
+    {
+      "company": "Northwind AI",
+      "role_title": "Principal Product Manager, Agent Platform",
+      "archetype": "B",
+      "archetype_match": "direct",
+      "domains": [
+        "ai",
+        "platform",
+        "llm"
+      ],
+      "location": "Remote (India eligible)",
+      "work_mode": "Remote",
+      "date_posted": "2026-09-12",
+      "date_confidence": "Verified",
+      "experience_asked": "9+ years",
+      "exp_min": 9,
+      "comp_raw": "USD 130k-165k",
+      "comp_currency": "USD",
+      "comp_min": 130000,
+      "comp_max": 165000,
+      "comp_confidence": "Stated",
+      "company_stage": "series_a",
+      "unmet_mandatories": [
+        "3+ years shipping developer platform APIs at scale"
+      ],
+      "missing_keywords": [
+        "Kubernetes",
+        "OpenAPI",
+        "developer relations"
+      ],
+      "apply_url": "https://example.com/jobs/principal-pm",
+      "source": "Wellfound"
+    },
+    {
+      "company": "Gulf Industrial Tech",
+      "role_title": "Director of Product - Connected Appliances",
+      "archetype": "A",
+      "archetype_match": "direct",
+      "domains": [
+        "hardware",
+        "iot",
+        "appliances"
+      ],
+      "location": "Dubai, UAE",
+      "work_mode": "Onsite",
+      "date_posted": "2026-09-18",
+      "date_confidence": "Unverified",
+      "experience_asked": "12+ years",
+      "exp_min": 12,
+      "comp_raw": "AED 480,000-600,000",
+      "comp_currency": "AED",
+      "comp_min": 480000,
+      "comp_max": 600000,
+      "comp_confidence": "Estimated",
+      "company_stage": "large_product",
+      "unmet_mandatories": [],
+      "missing_keywords": [
+        "Arabic",
+        "GCC retail channel"
+      ],
+      "apply_url": "https://example.com/gulf/director-product",
+      "source": "GulfTalent"
+    },
+    {
+      "company": "Meridian Embedded Systems",
+      "role_title": "Engineering Manager - Embedded",
+      "archetype": "D",
+      "archetype_match": "direct",
+      "domains": [
+        "embedded",
+        "hardware"
+      ],
+      "location": "Bangalore, India",
+      "work_mode": "Onsite",
+      "date_posted": "2026-09-14",
+      "date_confidence": "Verified",
+      "experience_asked": "12-18 years",
+      "exp_min": 12,
+      "exp_max": 18,
+      "comp_raw": "INR 42-50 LPA",
+      "comp_currency": "INR",
+      "comp_min": 4200000,
+      "comp_max": 5000000,
+      "comp_confidence": "Estimated",
+      "company_stage": "large_product",
+      "unmet_mandatories": [
+        "AUTOSAR"
+      ],
+      "missing_keywords": [
+        "AUTOSAR",
+        "ISO 26262",
+        "CAN bus"
+      ],
+      "apply_url": "https://example.com/meridian/em-embedded",
+      "source": "Instahyre"
+    },
+    {
+      "company": "Lowball Staffing",
+      "role_title": "Senior Product Manager",
+      "archetype": "B",
+      "archetype_match": "tangential",
+      "domains": [
+        "software"
+      ],
+      "location": "Pune, India",
+      "work_mode": "Onsite",
+      "date_posted": "2026-09-15",
+      "experience_asked": "8-12 years",
+      "exp_min": 8,
+      "exp_max": 12,
+      "comp_raw": "INR 24-28 LPA",
+      "comp_currency": "INR",
+      "comp_min": 2400000,
+      "comp_max": 2800000,
+      "comp_confidence": "Stated",
+      "company_stage": "services",
+      "unmet_mandatories": [
+        "5+ yrs insurance domain",
+        "P&C claims"
+      ],
+      "missing_keywords": [
+        "insurance",
+        "claims"
+      ],
+      "apply_url": "https://example.com/lowball",
+      "source": "Aggregator"
+    },
+    {
+      "company": "Example Robotics Pvt Ltd",
+      "role_title": "Head of Product (Robotics)",
+      "archetype": "A",
+      "archetype_match": "direct",
+      "domains": [
+        "hardware",
+        "robotics"
+      ],
+      "location": "Hyderabad",
+      "date_posted": "2026-09-16",
+      "comp_currency": "INR",
+      "comp_min": 5500000,
+      "source": "Duplicate test"
+    }
+  ],
+  "keywords": {
+    "generated": "2026-09-20",
+    "postings_analysed": 6,
+    "keywords": [
+      {
+        "term": "RTOS",
+        "category": "technical",
+        "frequency": 4,
+        "percent_of_postings": 67,
+        "criticality": "high",
+        "archetypes": [
+          "D"
+        ],
+        "can_i_claim_it": "yes"
+      },
+      {
+        "term": "roadmap ownership",
+        "category": "methodology",
+        "frequency": 5,
+        "percent_of_postings": 83,
+        "criticality": "high",
+        "archetypes": [
+          "A",
+          "B"
+        ],
+        "can_i_claim_it": "yes"
+      },
+      {
+        "term": "contract manufacturing",
+        "category": "domain",
+        "frequency": 3,
+        "percent_of_postings": 50,
+        "criticality": "medium",
+        "archetypes": [
+          "A"
+        ],
+        "can_i_claim_it": "yes_but_unstated",
+        "note": "You have done this but the CV does not say so in these words - add it."
+      },
+      {
+        "term": "MCP / agentic tooling",
+        "category": "technical",
+        "frequency": 2,
+        "percent_of_postings": 33,
+        "criticality": "medium",
+        "archetypes": [
+          "B"
+        ],
+        "can_i_claim_it": "yes_but_unstated",
+        "note": "You have done this but the CV does not say so in these words - add it."
+      }
+    ],
+    "resume_gaps": [
+      {
+        "term": "AUTOSAR",
+        "frequency": 2,
+        "percent_of_postings": 33,
+        "criticality": "high",
+        "can_i_claim_it": "no",
+        "note": "A real gap. Do not claim it; prepare an honest answer instead."
+      },
+      {
+        "term": "Kubernetes",
+        "frequency": 3,
+        "percent_of_postings": 50,
+        "criticality": "medium",
+        "can_i_claim_it": "no",
+        "note": "A real gap. Do not claim it; prepare an honest answer instead."
+      }
+    ],
+    "summary": {
+      "coverage_score": 62,
+      "top_5_gaps": [
+        "AUTOSAR",
+        "Kubernetes",
+        "ROS2",
+        "GCC channel",
+        "OpenAPI"
+      ],
+      "trending_up": [
+        "agentic AI",
+        "MCP",
+        "edge inference"
+      ],
+      "trending_down": []
+    }
+  },
+  "target_companies": [
+    {
+      "company": "ideaForge",
+      "why": "Indian deep-tech drone leader",
+      "careers_url": "https://ideaforgetech.com/careers",
+      "region": "India",
+      "open_roles_found": 0
+    },
+    {
+      "company": "Agnikul Cosmos",
+      "why": "Hardware-heavy space startup, Chennai",
+      "careers_url": "https://agnikul.in/careers",
+      "region": "India",
+      "open_roles_found": 1
+    }
+  ],
+  "linkedin_searches": [
+    "(\"Head of Product\" OR \"Director of Product\") AND (robotics OR IoT OR \"connected devices\") — Hyderabad, past week, 10+ yrs"
+  ],
+  "naukri_searches": [
+    "head of product hardware iot — Hyderabad/Bangalore/Remote, 10-18 yrs, 35+ LPA, last 15 days"
+  ]
+}

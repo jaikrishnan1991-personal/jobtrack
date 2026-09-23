@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+
+# Credentials
+.env
+
+# Your data: the tracker database, its backups, and every document generated from it
+# (data/*.db alone did not catch backups like jobtrack.db.bak-*, which is the whole database)
+data/
+
+# Your real config and CV. Both contain personal details - salary, phone number, work history.
+# The committed config.example.json / resume/master.example.json show the shape; copy them.
+config.json
+resume/master.json
+
+server.log
+*.log
+
+# Your filled-in research prompt (contains your profile and current CTC)
+RESEARCH_PROMPT.md
+
+# Your own seeded postings and the agent notes about your CV gaps
+imports/*.json

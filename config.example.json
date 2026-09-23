@@ -1,0 +1,554 @@
+{
+  "_comment": "Copy to config.json and make it yours. Salary floors and profile details are blanked here on purpose - config.json itself is gitignored so your real numbers never leave your machine. Edit this file to retune the search without touching code. Restart the server after editing, or hit POST /api/config/reload.",
+  "_calibration_note": "Bands as specified put most genuinely-good postings at 80+. After ~20 rows, if more than a third land in Strong, raise the thresholds (e.g. Strong 88, Worth a shot 76, Stretch 62) and click 'Re-score all'. Harsh bands are the point.",
+  "profile": {
+    "name": "Your Name",
+    "base": "Your City, Country",
+    "years_experience": 12,
+    "current_role": "Your current title",
+    "current_ctc_inr_lpa": 0,
+    "notice_days": 30,
+    "portfolio": "https://example.com",
+    "resume_keywords": [
+      "embedded c",
+      "c++",
+      "python",
+      "stm32",
+      "texas instruments",
+      "ti",
+      "rtos",
+      "i2c",
+      "spi",
+      "uart",
+      "sensor interfacing",
+      "firmware",
+      "mechatronics",
+      "robotics",
+      "iot",
+      "connected devices",
+      "smart appliances",
+      "hardware",
+      "product management",
+      "product strategy",
+      "roadmap",
+      "pricing",
+      "p&l",
+      "0 to 1",
+      "go to market",
+      "gtm",
+      "dfm",
+      "dfma",
+      "bom",
+      "bom cost",
+      "supply chain",
+      "contract manufacturing",
+      "factory",
+      "npi",
+      "npd",
+      "compliance",
+      "certification",
+      "bis",
+      "ce",
+      "emc",
+      "patent",
+      "computer vision",
+      "machine learning",
+      "ai",
+      "llm",
+      "mcp",
+      "agentic ai",
+      "cross functional leadership",
+      "team leadership",
+      "fundraising",
+      "series a",
+      "user research",
+      "prd",
+      "jira",
+      "figma",
+      "medical devices",
+      "underwater robotics",
+      "functional safety",
+      "railway safety"
+    ]
+  },
+  "archetypes": {
+    "A": "Hardware/IoT product leadership",
+    "B": "AI/platform product (senior IC or lead)",
+    "C": "Deep-tech startup leadership",
+    "D": "Embedded engineering management",
+    "E": "Ecosystem / incubator leadership"
+  },
+  "location_tiers": [
+    {
+      "tier": 1,
+      "multiplier": 1.0,
+      "match": [
+        "hyderabad",
+        "remote",
+        "work from home",
+        "anywhere in india",
+        "india remote"
+      ]
+    },
+    {
+      "tier": 2,
+      "multiplier": 0.9,
+      "match": [
+        "bangalore",
+        "bengaluru"
+      ]
+    },
+    {
+      "tier": 3,
+      "multiplier": 0.8,
+      "match": [
+        "mumbai",
+        "pune-mumbai",
+        "delhi",
+        "ncr",
+        "gurgaon",
+        "gurugram",
+        "noida"
+      ]
+    },
+    {
+      "tier": 4,
+      "multiplier": 0.85,
+      "match": [
+        "dubai",
+        "abu dhabi",
+        "sharjah",
+        "uae",
+        "united arab emirates"
+      ]
+    },
+    {
+      "tier": 5,
+      "multiplier": 0.75,
+      "match": [
+        "muscat",
+        "oman"
+      ]
+    },
+    {
+      "tier": 6,
+      "multiplier": 0.8,
+      "match": [
+        "singapore"
+      ]
+    }
+  ],
+  "comp_floors": {
+    "INR": {
+      "hard_floor": 0,
+      "target_low": 0,
+      "target_high": 0,
+      "unit": "per year"
+    },
+    "USD": {
+      "hard_floor": 0,
+      "target_low": 0,
+      "target_high": 0,
+      "unit": "per year"
+    },
+    "EUR": {
+      "hard_floor": 0,
+      "target_low": 0,
+      "target_high": 0,
+      "unit": "per year"
+    },
+    "AED": {
+      "hard_floor": 0,
+      "target_low": 0,
+      "target_high": 0,
+      "unit": "per year",
+      "tax_free": true
+    },
+    "OMR": {
+      "hard_floor": 0,
+      "target_low": 0,
+      "target_high": 0,
+      "unit": "per year",
+      "tax_free": true
+    },
+    "SGD": {
+      "hard_floor": 0,
+      "target_low": 0,
+      "target_high": 0,
+      "unit": "per year"
+    }
+  },
+  "tax_free_uplift": 1.27,
+  "_fx_comment": "Rough units of currency per 1 USD. Used only to compute a comparable USD figure for sorting/analytics. Update when you care.",
+  "fx_per_usd": {
+    "USD": 1,
+    "INR": 88,
+    "EUR": 0.92,
+    "AED": 3.67,
+    "OMR": 0.385,
+    "SGD": 1.32
+  },
+  "scoring_weights": {
+    "archetype": 25,
+    "domain": 20,
+    "seniority": 15,
+    "requirement_gaps": 15,
+    "company_stage": 10,
+    "compensation": 10,
+    "location": 5
+  },
+  "bands": [
+    {
+      "min": 80,
+      "label": "Strong",
+      "action": "Apply this week. Tailor the CV. Chase a referral."
+    },
+    {
+      "min": 65,
+      "label": "Worth a shot",
+      "action": "Apply with a tailored note."
+    },
+    {
+      "min": 50,
+      "label": "Stretch",
+      "action": "Apply only if the company genuinely interests you."
+    },
+    {
+      "min": 0,
+      "label": "Do not apply",
+      "action": "Drop it unless it signals a market trend."
+    }
+  ],
+  "freshness_days": 14,
+  "followup_days": 10,
+  "stale_days": 21,
+  "hard_excludes": [
+    "pure saas pm with no hardware/ai/platform angle",
+    "fintech / insurtech / ecommerce / marketplace domain-depth roles",
+    "roles requiring 5+ yrs in a domain with zero exposure",
+    "under 10 years experience required",
+    "IC engineering below manager level",
+    "staffing-agency bench roles with no named end client"
+  ],
+  "linkedin": {
+    "_comment": "LinkedIn discovery via Apify. Token lives in .env (APIFY_TOKEN=...), never here. Each query runs in every location. Cost ~USD 1 per 1000 results on the default actor.",
+    "actor": "curious_coder/linkedin-jobs-scraper",
+    "actor_input_extra": {
+      "scrapeCompany": true
+    },
+    "max_results_per_run": 300,
+    "timeout_minutes": 20,
+    "posted_within_days": 14,
+    "_experience_levels": "LinkedIn f_E codes: 4 Mid-Senior, 5 Director, 6 Executive",
+    "experience_levels": [
+      4,
+      5,
+      6
+    ],
+    "queries": [
+      {
+        "archetype": "A",
+        "keywords": "(\"Group Product Manager\" OR \"Lead Product Manager\" OR \"Principal Product Manager\" OR \"Product Lead\") AND (robotics OR AMR OR \"autonomous mobile\" OR \"industrial automation\" OR \"warehouse automation\" OR \"autonomous systems\")",
+        "favourite": "Example Robotics GPM"
+      },
+      {
+        "archetype": "D",
+        "keywords": "(\"Edge AI\" OR \"Physical AI\" OR \"Embodied AI\" OR \"Edge Robotics\" OR \"AI Lab\") AND (Lead OR Head OR Manager OR Architect OR Principal)",
+        "favourite": "Example Robotics GPM"
+      },
+      {
+        "archetype": "D",
+        "keywords": "(robotics OR \"edge computing\" OR \"hardware-software integration\") AND (\"Technical Lead\" OR \"Solution Lead\" OR \"Innovation Lead\" OR \"Head of Robotics\")",
+        "favourite": "Example Robotics GPM"
+      },
+      {
+        "archetype": "A",
+        "keywords": "(\"Head of Product\" OR \"Director of Product\" OR \"VP Product\") AND (hardware OR IoT OR robotics OR \"connected devices\" OR appliances)"
+      },
+      {
+        "archetype": "B",
+        "keywords": "(\"Principal Product Manager\" OR \"Staff Product Manager\" OR \"Group Product Manager\" OR \"Lead Product Manager\") AND (AI OR \"machine learning\" OR platform OR agentic)"
+      },
+      {
+        "archetype": "C",
+        "keywords": "(CTO OR CPO OR \"Chief Product Officer\" OR \"Chief Technology Officer\") AND (robotics OR hardware OR deeptech OR IoT)"
+      },
+      {
+        "archetype": "D",
+        "keywords": "(\"Engineering Manager\" OR \"Head of Embedded\" OR \"Embedded Systems Manager\" OR \"Head of Firmware\") AND (embedded OR firmware)"
+      },
+      {
+        "archetype": "E",
+        "keywords": "(\"Head of Programmes\" OR \"Program Director\" OR \"Head of Programs\") AND (incubator OR accelerator OR deeptech OR \"innovation hub\")"
+      }
+    ],
+    "locations": [
+      {
+        "name": "Hyderabad, Telangana, India"
+      },
+      {
+        "name": "India",
+        "remote": true
+      },
+      {
+        "name": "Bengaluru, Karnataka, India"
+      },
+      {
+        "name": "Mumbai, Maharashtra, India"
+      },
+      {
+        "name": "Delhi, India"
+      },
+      {
+        "name": "United Arab Emirates"
+      },
+      {
+        "name": "Oman"
+      },
+      {
+        "name": "Singapore"
+      }
+    ],
+    "known_gaps": [
+      "autosar",
+      "iso 26262",
+      "aspice",
+      "kubernetes",
+      "sap",
+      "procurement",
+      "source-to-pay",
+      "itsm",
+      "servicenow",
+      "clinical",
+      "fda 510(k)",
+      "payments",
+      "lending",
+      "insurance",
+      "actuarial",
+      "adtech",
+      "salesforce",
+      "arabic",
+      "phd",
+      "security clearance",
+      "do-178c",
+      "aemp",
+      "telematics",
+      "px4",
+      "ardupilot",
+      "do-160",
+      "as9100",
+      "mil-std",
+      "wms",
+      "fcc",
+      "ptcrb"
+    ],
+    "claimable_unstated": [
+      "contract manufacturing",
+      "supplier management",
+      "dfm",
+      "certification",
+      "compliance",
+      "bom cost",
+      "npi",
+      "mcp",
+      "agentic ai",
+      "fundraising",
+      "patent",
+      "0 to 1",
+      "hardware-software integration",
+      "firmware roadmap",
+      "ota",
+      "over-the-air",
+      "hardware-software co-design",
+      "edge inference",
+      "field reliability"
+    ]
+  },
+  "remote_restricted_tokens": [
+    "united states",
+    "usa",
+    "us only",
+    "us-remote",
+    "u.s.",
+    "canada",
+    "united kingdom",
+    "uk only",
+    "europe",
+    "eu only",
+    "latam",
+    "australia"
+  ],
+  "unmet_mandatories_hard_cap": 3,
+  "seed_on_first_run": true,
+  "_favourites_comment": "Roles you marked as the right kind of job. Every posting gets an affinity sub-score (0-10) for how much it resembles these; the rest of the rubric is scaled to 90 so the total stays /100. Star more roles in the app and they are added automatically (stored in the database).",
+  "favourite_weight": 10,
+  "favourite_full_match_hits": 6,
+  "apply_list_min_affinity": 0.6,
+  "favourite_roles": [
+    {
+      "company": "Example Robotics",
+      "role_title": "Group Product Manager - Robotics",
+      "why": "Replace with a role that is the kind of job you actually want. Every posting gets scored on how much it resembles these, so be specific.",
+      "key_terms": [
+        "robotics",
+        "autonomous",
+        "hardware",
+        "firmware",
+        "roadmap",
+        "platform",
+        "deployments",
+        "reliability",
+        "sensors",
+        "industrial automation"
+      ]
+    }
+  ],
+  "services_lab_title_pattern": "\\b(ai lab|lab|innovation|r&d|research|coe|centre of excellence|center of excellence|incubat)\\b",
+  "services_lab_stage_score": 7,
+  "indeed": {
+    "_comment": "Indeed discovery via Apify (curious_coder/indeed-scraper). Token lives in .env (APIFY_TOKEN=...), shared with LinkedIn. This actor takes one query+location per run, so a sync fans out into #queries x #locations small runs instead of one batched run. Cost ~USD 0.0001/result plus a small per-run start fee.",
+    "actor": "curious_coder/indeed-scraper",
+    "max_results_per_run": 25,
+    "timeout_minutes": 15,
+    "posted_within_days": 14,
+    "queries": [
+      {
+        "archetype": "A",
+        "query": "\"Group Product Manager\" OR \"Head of Product\" robotics OR AMR OR IoT OR \"connected devices\"",
+        "favourite": "Example Robotics GPM"
+      },
+      {
+        "archetype": "D",
+        "query": "\"Edge AI\" OR \"Physical AI\" OR \"AI Lab\" lead OR head OR manager",
+        "favourite": "Example Robotics GPM"
+      },
+      {
+        "archetype": "D",
+        "query": "\"Engineering Manager\" embedded OR firmware OR robotics"
+      },
+      {
+        "archetype": "B",
+        "query": "\"Principal Product Manager\" AI OR \"machine learning\" OR platform"
+      }
+    ],
+    "locations": [
+      {
+        "name": "Hyderabad, Telangana",
+        "country": "in"
+      },
+      {
+        "name": "Bengaluru, Karnataka",
+        "country": "in"
+      },
+      {
+        "name": "Delhi",
+        "country": "in"
+      },
+      {
+        "name": "Dubai",
+        "country": "ae"
+      },
+      {
+        "name": "Singapore",
+        "country": "sg"
+      }
+    ]
+  },
+  "naukri": {
+    "_comment": "Naukri discovery via Apify (muhammetakkurtt/naukri-job-scraper). Token lives in .env (APIFY_TOKEN=...), shared with LinkedIn/Indeed. Naukri.com (India) searches are built as direct naukri.com/<keyword>-jobs-in-<city> URLs; Gulf searches go through NaukriGulf via jobBoard+location instead (city codes there aren't slug-based). Cost well under USD 0.01 per search.",
+    "actor": "muhammetakkurtt/naukri-job-scraper",
+    "max_results_per_run": 50,
+    "timeout_minutes": 15,
+    "queries": [
+      {
+        "archetype": "A",
+        "keyword": "group product manager robotics"
+      },
+      {
+        "archetype": "D",
+        "keyword": "edge ai physical ai lab lead"
+      },
+      {
+        "archetype": "D",
+        "keyword": "embedded engineering manager"
+      },
+      {
+        "archetype": "A",
+        "keyword": "head of product iot hardware"
+      }
+    ],
+    "cities": [
+      "Hyderabad",
+      "Bengaluru",
+      "Mumbai",
+      "Delhi Ncr"
+    ],
+    "gulf_locations": [
+      "Dubai",
+      "Muscat"
+    ]
+  },
+  "instahyre": {
+    "_comment": "Instahyre discovery via Apify (getascraper/instahyre-jobs-scraper). India-only, curated tech jobs. Keywords x locations are both arrays the actor searches in a SINGLE call (unlike Indeed/Naukri/Wellfound, no fan-out needed here). Cheap: ~USD 0.0011/job including details.",
+    "actor": "getascraper/instahyre-jobs-scraper",
+    "max_results_per_run": 150,
+    "timeout_minutes": 10,
+    "_keywords_comment": "Actor caps this at 10 items.",
+    "keywords": [
+      "Product Manager",
+      "Head of Product",
+      "Director of Product",
+      "Principal Product Manager",
+      "Group Product Manager",
+      "Engineering Manager",
+      "CTO",
+      "Robotics",
+      "Embedded",
+      "IoT"
+    ],
+    "locations": [
+      "Bangalore",
+      "Hyderabad",
+      "Mumbai",
+      "Delhi",
+      "Gurgaon",
+      "Pune"
+    ]
+  },
+  "wellfound": {
+    "_comment": "Wellfound/AngelList discovery via Apify (orgupdate/wellfound-jobs-scraper) - startup-heavy, relevant to the founder/deep-tech archetypes (C/E). One location per run (fanned out like Indeed/Naukri, same 3-concurrent throttle). No actor-side keyword filter applied - the comma-keyword field's AND/OR semantics for multi-archetype search are unclear, so this relies on the tracker's own archetype/title classification against a broad per-location pull instead, same approach that worked well for Naukri.",
+    "actor": "orgupdate/wellfound-jobs-scraper",
+    "pages_per_run": 2,
+    "timeout_minutes": 10,
+    "locations": [
+      {
+        "name": "Hyderabad",
+        "country": "India"
+      },
+      {
+        "name": "Bengaluru",
+        "country": "India"
+      },
+      {
+        "name": "Mumbai",
+        "country": "India"
+      },
+      {
+        "name": "Delhi",
+        "country": "India"
+      },
+      {
+        "name": "Remote",
+        "country": "India"
+      },
+      {
+        "name": "Dubai",
+        "country": "United Arab Emirates"
+      },
+      {
+        "name": "Singapore",
+        "country": "Singapore"
+      }
+    ]
+  }
+}

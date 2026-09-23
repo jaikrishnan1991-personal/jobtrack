@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JG Job Tracker</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<header>
+  <h1>JG Job Tracker <span id="whoami"></span></h1>
+  <div class="spacer"></div>
+  <div class="sub" id="headline">loading…</div>
+</header>
+
+<nav id="tabs">
+  <button data-tab="apply" class="on">Apply list <span id="applycount" class="tiny"></span></button>
+  <button data-tab="pipeline">Pipeline</button>
+  <button data-tab="followups">Follow-ups <span id="alertcount" class="tiny"></span></button>
+  <button data-tab="keywords">Keyword gaps</button>
+  <button data-tab="funnel">Funnel</button>
+  <button data-tab="targets">Target companies</button>
+  <button data-tab="runs">Run log</button>
+  <button data-tab="import">Import</button>
+</nav>
+
+<main>
+  <!-- APPLY LIST -->
+  <section id="tab-apply">
+    <div class="panel">
+      <div class="row">
+        <div>
+          <h3 style="margin:0">Roles to apply for</h3>
+          <div class="small muted">Starred roles first, then Strong / Worth-a-shot, plus anything that closely resembles a starred role. ☆ Star a role to tell the scorer and the next search “more like this”.</div>
+        </div>
+        <div class="spacer"></div>
+        <label class="small muted"><input type="checkbox" id="a-stretch"> include Stretch</label>
+      </div>
+    </div>
+    <div id="applylist"></div>
+  </section>
+
+  <!-- PIPELINE -->
+  <section id="tab-pipeline" class="hidden">
+    <div class="stats" id="pipestats"></div>
+    <div class="panel">
+      <div class="row">
+        <input id="q" placeholder="Search company, title, JD…" style="min-width:220px">
+        <select id="f-band"><option value="">All bands</option></select>
+        <select id="f-status"><option value="">All statuses</option></select>
+        <select id="f-arch"><option value="">All archetypes</option></select>
+        <label class="small muted"><input type="checkbox" id="f-rej"> show auto-rejected</label>
+        <div class="spacer"></div>
+        <button class="btn" id="exp-csv">Export CSV</button>
+        <button class="btn" id="exp-json">Export JSON</button>
+        <button class="btn" id="btn-brief">Agent brief</button>
+        <button class="btn" id="btn-rescore" title="Re-apply config.json rubric to all rows">Re-score all</button>
+      </div>
+    </div>
+    <div class="panel" style="padding:0">
+      <div class="tblwrap"><table id="jobs">
+        <thead><tr>
+          <th data-sort="final_score">Score</th><th>Band</th><th data-sort="company">Company</th>
+          <th>Role</th><th>Arch</th><th>Location</th><th>Comp</th>
+          <th data-sort="date_posted">Posted</th><th>Status</th><th>Biggest gap</th><th></th>
+        </tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <!-- FOLLOW-UPS -->
+  <section id="tab-followups" class="hidden">
+    <div class="panel"><div id="alerts">loading…</div></div>
+  </section>
+
+  <!-- KEYWORDS -->
+  <section id="tab-keywords" class="hidden">
+    <div class="stats" id="kwstats"></div>
+    <div class="panel">
+      <h3 style="margin-top:0">CV quick wins — you have it, your CV doesn't say so</h3>
+      <p class="small muted">The highest-value output of a run. Each of these is a line you can add honestly today.</p>
+      <div id="kw-wins"></div>
+    </div>
+    <div class="panel">
+      <h3 style="margin-top:0">Real gaps — you don't have these</h3>
+      <p class="small muted">Do not put these on the CV. Use them to decide what to learn or which archetype to drop.</p>
+      <div id="kw-gaps"></div>
+    </div>
+    <div class="panel">
+      <h3 style="margin-top:0">All terms seen</h3>
+      <div id="kw-all"></div>
+    </div>
+  </section>
+
+  <!-- FUNNEL -->
+  <section id="tab-funnel" class="hidden">
+    <div class="stats" id="funstats"></div>
+    <div class="panel">
+      <h3 style="margin-top:0">Conversion by archetype</h3>
+      <p class="small muted">Once you are past ~20 applications this table, not any single posting, is the point of the tracker. Kill the archetypes that convert at zero.</p>
+      <div id="fun-arch"></div>
+    </div>
+    <div class="panel">
+      <h3 style="margin-top:0">Pipeline by status</h3>
+      <div id="fun-status"></div>
+    </div>
+  </section>
+
+  <!-- TARGETS -->
+  <section id="tab-targets" class="hidden">
+    <div class="panel">
+      <div class="row">
+        <input id="t-company" placeholder="Company">
+        <input id="t-url" placeholder="Careers URL" style="min-width:240px">
+        <input id="t-region" placeholder="Region" style="width:120px">
+        <input id="t-why" placeholder="Why" style="min-width:200px">
+        <button class="btn primary" id="t-add">Add</button>
+      </div>
+    </div>
+    <div class="panel" style="padding:0"><div class="tblwrap"><table id="targets">
+      <thead><tr><th>Company</th><th>Why</th><th>Careers page</th><th>Region</th>
+      <th>Last checked</th><th>Open roles</th><th></th></tr></thead><tbody></tbody>
+    </table></div></div>
+  </section>
+
+  <!-- RUNS -->
+  <section id="tab-runs" class="hidden">
+    <div class="panel" style="padding:0"><div class="tblwrap"><table id="runs">
+      <thead><tr><th>Date</th><th>Agent</th><th>Scanned</th><th>Passed</th><th>Added</th>
+      <th>Dupes</th><th>Auto-rejected</th><th>Sources that returned nothing</th></tr></thead>
+      <tbody></tbody>
+    </table></div></div>
+  </section>
+
+  <!-- IMPORT -->
+  <section id="tab-import" class="hidden">
+    <div class="panel">
+      <div class="row">
+        <h3 style="margin:0">LinkedIn sync (Apify)</h3>
+        <div class="spacer"></div>
+        <span class="small muted" id="li-meta"></span>
+      </div>
+      <p class="small muted">Runs the queries × locations in <code>config.json → linkedin</code> through a
+        no-login Apify actor, enriches each posting heuristically and scores it here. Unmet mandatories are
+        keyword-matched — verify before applying. Takes 3–10 minutes.</p>
+      <div class="row">
+        <button class="btn primary" id="li-run">Run LinkedIn sync</button>
+        <input id="li-dataset" placeholder="…or import an existing Apify dataset ID" style="min-width:280px">
+        <button class="btn" id="li-ds">Import dataset</button>
+        <button class="btn" id="li-urls">Show search URLs</button>
+      </div>
+      <pre id="li-log" class="hidden" style="margin-top:12px;max-height:220px"></pre>
+    </div>
+    <div class="panel">
+      <div class="row">
+        <h3 style="margin:0">Indeed sync (Apify)</h3>
+        <div class="spacer"></div>
+        <span class="small muted" id="id-meta"></span>
+      </div>
+      <p class="small muted">Runs the queries × locations in <code>config.json → indeed</code>. One query+location
+        per Apify run (fanned out and polled together), unlike LinkedIn's single batched run. Usually a couple
+        of minutes.</p>
+      <div class="row">
+        <button class="btn primary" id="id-run">Run Indeed sync</button>
+        <button class="btn" id="id-urls">Show search specs</button>
+      </div>
+      <pre id="id-log" class="hidden" style="margin-top:12px;max-height:220px"></pre>
+    </div>
+    <div class="panel">
+      <div class="row">
+        <h3 style="margin:0">Naukri sync (Apify)</h3>
+        <div class="spacer"></div>
+        <span class="small muted" id="nk-meta"></span>
+      </div>
+      <p class="small muted">Runs the keywords × cities in <code>config.json → naukri</code> — naukri.com for
+        India, NaukriGulf for UAE/Oman. One search per Apify run, fanned out and polled together.</p>
+      <div class="row">
+        <button class="btn primary" id="nk-run">Run Naukri sync</button>
+        <button class="btn" id="nk-urls">Show search specs</button>
+      </div>
+      <pre id="nk-log" class="hidden" style="margin-top:12px;max-height:220px"></pre>
+    </div>
+    <div class="panel">
+      <div class="row">
+        <h3 style="margin:0">Instahyre sync (Apify)</h3>
+        <div class="spacer"></div>
+        <span class="small muted" id="ih-meta"></span>
+      </div>
+      <p class="small muted">Curated India tech jobs. Keywords × locations in
+        <code>config.json → instahyre</code> run as a single Apify call. Usually under a minute.</p>
+      <div class="row">
+        <button class="btn primary" id="ih-run">Run Instahyre sync</button>
+        <button class="btn" id="ih-urls">Show search input</button>
+      </div>
+      <pre id="ih-log" class="hidden" style="margin-top:12px;max-height:220px"></pre>
+    </div>
+    <div class="panel">
+      <div class="row">
+        <h3 style="margin:0">Wellfound sync (Apify)</h3>
+        <div class="spacer"></div>
+        <span class="small muted" id="wf-meta"></span>
+      </div>
+      <p class="small muted">Startup-heavy listings from <code>config.json → wellfound</code> — most relevant to the
+        founder / deep-tech archetypes. One location per Apify run, fanned out and polled together.</p>
+      <div class="row">
+        <button class="btn primary" id="wf-run">Run Wellfound sync</button>
+        <button class="btn" id="wf-urls">Show search specs</button>
+      </div>
+      <pre id="wf-log" class="hidden" style="margin-top:12px;max-height:220px"></pre>
+    </div>
+    <div class="panel">
+      <div class="row">
+        <h3 style="margin:0">Recruiter emails</h3>
+        <div class="spacer"></div>
+        <span class="small muted" id="oe-meta"></span>
+      </div>
+      <p class="small muted">Scans job descriptions already in the tracker for a contact address — free, no Apify call.
+        Most boards deliberately hide recruiter addresses behind their own apply flow, so expect a low hit rate;
+        where nothing is found you can paste an address into the email composer yourself.</p>
+      <div class="row">
+        <button class="btn primary" id="oe-harvest">Find emails in job descriptions</button>
+      </div>
+      <pre id="oe-log" class="hidden" style="margin-top:12px;max-height:160px"></pre>
+    </div>
+    <div class="panel">
+      <h3 style="margin-top:0">Paste the research agent's JSON</h3>
+      <p class="small muted">Accepts the full run payload (<code>run</code>, <code>postings</code>,
+        <code>keywords</code>, <code>target_companies</code>) or a bare array of postings.
+        Scoring happens here, not in the agent. Duplicates are skipped by company + normalised title.</p>
+      <textarea id="importbox" placeholder='{"run": {...}, "postings": [...]}'></textarea>
+      <div class="row" style="margin-top:10px">
+        <input type="file" id="importfile" accept=".json">
+        <div class="spacer"></div>
+        <button class="btn primary" id="btn-import">Import</button>
+      </div>
+      <div id="importresult"></div>
+    </div>
+  </section>
+</main>
+
+<div class="drawer hidden" id="drawer"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

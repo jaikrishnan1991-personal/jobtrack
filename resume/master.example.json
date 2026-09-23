@@ -1,0 +1,94 @@
+{
+  "_comment": "Copy to resume/master.json. This is the ONLY source of resume and cover-letter text: the generators select and order what is here, they never invent claims. Text is treated as trusted LaTeX, so \textbf{} and \\& work. tags are archetype letters from config.json; keywords drive matching against a job description.",
+  "basics": {
+    "name": "Your Name",
+    "location": "City, Country",
+    "phone": "+00 0000000000",
+    "email": "you@example.com",
+    "linkedin": "linkedin.com/in/you",
+    "website": "example.com",
+    "availability": "Notice period: 30 days"
+  },
+  "headlines": {
+    "A": "Headline used for archetype A roles",
+    "default": "Fallback headline"
+  },
+  "summaries": {
+    "A": "Two or three sentences used as the summary for archetype A roles.",
+    "default": "Fallback summary."
+  },
+  "experience": [
+    {
+      "company": "Company Name",
+      "title": "Your Title",
+      "dates": "Jan 2020 -- Present",
+      "location": "City",
+      "min_bullets": 2,
+      "max_bullets": 4,
+      "intro": "Optional one-line scope statement under the role header.",
+      "bullets": [
+        {
+          "source": "cv",
+          "tags": [
+            "A",
+            "D"
+          ],
+          "keywords": [
+            "roadmap",
+            "firmware",
+            "iot"
+          ],
+          "text": "Something you actually did, with \textbf{the part that matters} in bold."
+        }
+      ]
+    }
+  ],
+  "compact_roles": [
+    {
+      "title": "Earlier Roles",
+      "company": "Employer A, Employer B",
+      "dates": "2010 -- 2017",
+      "location": "City",
+      "tags": [
+        "D"
+      ],
+      "text": "One-line summary of earlier work."
+    }
+  ],
+  "projects": [
+    {
+      "source": "stated",
+      "tags": [
+        "B"
+      ],
+      "keywords": [
+        "ai",
+        "llm"
+      ],
+      "title": "Project name",
+      "text": "What it is and why it matters."
+    }
+  ],
+  "skills": [
+    {
+      "group": "Group Name",
+      "items": [
+        "Skill One",
+        "Skill Two"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Your Degree",
+      "school": "Institution",
+      "year": "2013"
+    }
+  ],
+  "patents": [
+    {
+      "title": "Patent or IP",
+      "text": "Short description."
+    }
+  ]
+}
