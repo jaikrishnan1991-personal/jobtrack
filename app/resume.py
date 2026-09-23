@@ -216,8 +216,11 @@ def render_tex(job: dict, t: dict) -> str:
     out.append(r"{\color{accent}\bfseries %s}\\[3pt]" % uni(t["headline"]))
     contact = [uni(b["location"]), uni(b["phone"]),
                r"\href{mailto:%s}{%s}" % (b["email"], b["email"]),
-               r"\href{https://%s}{%s}" % (b["linkedin"], b["linkedin"]),
-               r"\href{https://%s}{%s}" % (b["website"], b["website"])]
+               r"\href{https://%s}{%s}" % (b["linkedin"], b["linkedin"])]
+    # optional, so a master.json without it still renders
+    for key in ("github", "website"):
+        if b.get(key):
+            contact.append(r"\href{https://%s}{%s}" % (b[key], b[key]))
     out.append(r"{\small " + r" \textperiodcentered{} ".join(contact) + r"}\\[1pt]")
     avail = b.get("availability") or ""
     city = relocation_city(job)

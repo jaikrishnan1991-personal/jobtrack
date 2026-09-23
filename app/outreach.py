@@ -103,8 +103,9 @@ def compose(job: dict, attach_cover_letter: bool = False) -> dict:
 
     greeting = f"Dear {job['recruiter_name'].strip()}," if job.get("recruiter_name") else "Dear Hiring Team,"
     paragraphs = [_plain(p) for p in t["letter_paragraphs"]]
-    sign_off = "\n".join(["Best regards,", basics["name"],
-                          f"{basics['phone']} \u00b7 {basics['email']} \u00b7 {basics['website']}"])
+    links = [basics["phone"], basics["email"]]
+    links += [basics[k] for k in ("website", "github") if basics.get(k)]
+    sign_off = "\n".join(["Best regards,", basics["name"], " \u00b7 ".join(links)])
     body = "\n\n".join([greeting, *paragraphs,
                         "My CV is attached. I would welcome the chance to discuss the role.",
                         sign_off])
