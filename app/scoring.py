@@ -146,7 +146,7 @@ def score_archetype(match: str | None, archetype: str | None) -> float:
         return 15.0
     if m in ("tangential", "weak"):
         return 5.0
-    return 25.0 if archetype in ("A", "B", "C", "D", "E") else 5.0
+    return 25.0 if archetype in ("A", "B", "C", "D", "E", "F", "G") else 5.0
 
 
 def score_domain(domains: list[str] | None) -> float:

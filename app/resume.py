@@ -144,8 +144,14 @@ def tailor(job: dict) -> dict:
         roles.append({**exp, "chosen": [c[2] for c in chosen],
                       "dropped": [t[2]["text"] for t in ranked if t not in chosen]})
 
-    projects = [p for p in m.get("projects", [])
-                if arch in ("B", "C") or any(_has(text, k) for k in p.get("keywords", []))]
+    # A project is only worth the space it takes. For the archetypes it was written for it goes
+    # in unconditionally; anywhere else it has to earn a place with more than one keyword - a
+    # single generic term ("platform", "api") matches almost any JD and drags in a project that
+    # has nothing to do with the role.
+    projects = [] if job.get("no_projects") else [
+        p for p in m.get("projects", [])
+        if arch in ("B", "C")
+        or sum(1 for k in p.get("keywords", []) if _has(text, k)) >= 2]
 
     compact = m.get("compact_roles", [])  # keep CV order
 

@@ -105,10 +105,17 @@ def render_tex(job: dict, t: dict) -> str:
     if b.get("website"):
         contact.append(r"\href{https://%s}{%s}" % (b["website"], b["website"]))
     out.append(r"{\small " + r" \textperiodcentered{} ".join(contact) + r"}\\[1pt]")
-    # GitHub on its own line - see resume.py for why it is not on the contact line
+    # GitHub on its own line - see resume.py for why it is not on the contact line. It needs an
+    # explicit break: without one the rule below is typeset onto the same baseline and strikes
+    # through the URL.
     if b.get("github"):
-        out.append(r"{\small\color{muted} \href{https://%s}{%s}}" % (b["github"], b["github"]))
+        out.append(r"{\small\color{muted} \href{https://%s}{%s}}\\[4pt]"
+                   % (b["github"], b["github"]))
     out.append(r"{\color{accent}\rule{\linewidth}{0.6pt}}")
+    # The preamble sets parindent to 0 for the resume, which leaves letter paragraphs with no
+    # separation at all - the body arrives as one solid block. Space them from here on, so the
+    # header above keeps its own tight spacing.
+    out.append(r"\setlength{\parskip}{6pt}")
     out.append("")
     out.append(date.today().strftime("%d %B %Y"))
     out.append("")
@@ -127,12 +134,20 @@ def render_tex(job: dict, t: dict) -> str:
         out.append("")
 
     city = resume.relocation_city(job)
-    notice = re.sub(r"^Notice period:\s*", "", b.get("availability") or "").strip()
+    # availability is free text. "Notice period: 15 days" becomes "can join in 15 days", but
+    # anything else is already a sentence about availability ("Available to join immediately")
+    # and has to be used as written - the old code stripped a prefix that was not there and
+    # produced "can join in Available to join immediately".
+    avail = (b.get("availability") or "").strip()
+    notice = re.match(r"^Notice period:\s*(.+)$", avail, re.I)
     bits = []
     if city:
         bits.append(f"I am open to relocating to {esc(city)}")
     if notice:
-        bits.append(("and can join in " if bits else "I can join in ") + esc(notice))
+        bits.append(("and can join in " if bits else "I can join in ")
+                    + esc(notice.group(1).strip()))
+    elif avail:
+        bits.append(("and am " if bits else "I am ") + esc(_lower_first(avail)))
     if bits:
         out.append(" ".join(bits) + ".")
     out.append("I would welcome the chance to discuss how I could contribute.")
