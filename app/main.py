@@ -17,14 +17,34 @@ from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import (FileResponse, HTMLResponse, JSONResponse,
                                PlainTextResponse, StreamingResponse)
 from fastapi.staticfiles import StaticFiles
+from starlette.concurrency import run_in_threadpool
 
-from . import (cover_letter, db, indeed, instahyre, linkedin, naukri, outreach, resume,
-               scoring, wellfound)
+from . import (access_guard, cover_letter, db, indeed, instahyre, linkedin, naukri, outreach,
+               resume, scoring, wellfound)
 
 ROOT = Path(__file__).resolve().parent.parent
 STATIC = Path(__file__).resolve().parent / "static"
 
 app = FastAPI(title="JG Job Tracker", version="1.0.0")
+
+
+@app.middleware("http")
+async def _remote_access_guard(request: Request, call_next):
+    """See access_guard.py. Local requests pass untouched; anything that came through Cloudflare
+    must carry a valid Access login for this app and an allowed email, or it gets a bare 403."""
+    if access_guard.is_remote(request.headers):
+        try:
+            # verification may fetch Cloudflare's signing keys - keep that off the event loop
+            verdict = await run_in_threadpool(
+                access_guard.verify_remote, request.headers, request.cookies)
+        except Exception as e:  # anything unexpected is a refusal, never a pass
+            verdict = access_guard.Verdict(False, f"guard error: {type(e).__name__}")
+        if not verdict.allowed:
+            # the reason goes to the server log only - a caller learns nothing about why
+            access_guard.log.warning("refused %s %s: %s", request.method, request.url.path,
+                                     verdict.reason)
+            return PlainTextResponse("Forbidden", status_code=403)
+    return await call_next(request)
 
 STATUSES = ["Not Applied", "Applied", "Recruiter Screen", "Interviewing",
             "Offer", "Rejected", "Withdrawn", "Ghosted", "Do Not Apply"]

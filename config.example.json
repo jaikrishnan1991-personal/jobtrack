@@ -76,7 +76,9 @@
     "B": "AI/platform product (senior IC or lead)",
     "C": "Deep-tech startup leadership",
     "D": "Embedded engineering management",
-    "E": "Ecosystem / incubator leadership"
+    "E": "Ecosystem / incubator leadership",
+    "F": "UX / product research & learning experience (EdTech)",
+    "G": "Enterprise technology product management (digital platforms at scale)"
   },
   "location_tiers": [
     {
@@ -549,6 +551,14 @@
         "name": "Singapore",
         "country": "Singapore"
       }
+    ]
+  },
+  "remote_access": {
+    "_comment": "Remote access through a Cloudflare Tunnel. Requests arriving via Cloudflare must carry a valid Cloudflare Access login for this application (aud) from this team, for an email listed here - see app/access_guard.py. Local use on 127.0.0.1 is unaffected. Leave blank to refuse all remote requests.",
+    "team_domain": "yourteam.cloudflareaccess.com",
+    "aud": "",
+    "allowed_emails": [
+      "you@example.com"
     ]
   }
 }
